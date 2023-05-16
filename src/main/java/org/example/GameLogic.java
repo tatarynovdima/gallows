@@ -1,9 +1,5 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class GameLogic {
     private static final PropertiesReader propertiesReader = new PropertiesReader();
     private static final char[]CHARS = propertiesReader.readDictionaryFromFile();
@@ -13,7 +9,7 @@ public class GameLogic {
         GameLogic gameLogic = new GameLogic();
 
 
-        if (consoleReader.greetingMessage() == true){
+        if (consoleReader.greetingMessage()){
             System.out.println("I made a word...");
             char templetter = consoleReader.enterLetter();
         }
