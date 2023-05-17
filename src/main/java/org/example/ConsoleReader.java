@@ -62,4 +62,34 @@ public class ConsoleReader {
             throw new RuntimeException(e);
         }
     }
+
+    public int chooseDifficultyLevel() {
+        System.out.println("Choose the difficulty level:");
+        System.out.println("1) Easy (10 mistakes allowed)");
+        System.out.println("2) Medium (7 mistakes allowed)");
+        System.out.println("3) Hard (5 mistakes allowed)");
+
+        int choice = readInt();
+        switch (choice) {
+            case 1:
+                return 10;
+            case 2:
+                return 7;
+            case 3:
+                return 5;
+            default:
+                System.out.println("Invalid choice. Setting difficulty to Medium.");
+                return 7;
+        }
+    }
+
+    private int readInt() {
+        try {
+            String input = bufferedReader.readLine();
+            return Integer.parseInt(input);
+        } catch (IOException | NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
