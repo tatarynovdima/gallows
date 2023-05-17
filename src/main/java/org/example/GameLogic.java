@@ -11,15 +11,15 @@ public class GameLogic {
         GameLogic gameLogic = new GameLogic();
 
         if (consoleReader.greetingMessage()) {
-            String word = Arrays.toString(propertiesReader.readDictionaryFromFile());
-            String wordStatus = "_".repeat(word.length());
+            char[] word = propertiesReader.readDictionaryFromFile();
+            String wordStatus = "_".repeat(word.length);
 
             System.out.println("I made a word...");
             int maxMistakes = consoleReader.chooseDifficultyLevel();
             int mistakes = 0;
             while (mistakes < maxMistakes) {
                 char letter = consoleReader.enterLetter();
-                boolean isLetterInWord = gameLogic.checkLetterInArray(letter);
+                boolean isLetterInWord = gameLogic.checkLetterInArray(letter, word);
 
                 if (isLetterInWord) {
                     if (!gameLogic.isLetterAlreadyGuessed(letter, wordStatus)) {
@@ -37,14 +37,14 @@ public class GameLogic {
                 }
             }
 
-            System.out.println("You lost! The word was " + word);
+            System.out.println("You lost! The word was " + Arrays.toString(word));
         }
     }
 
-
-    private boolean checkLetterInArray(char letter) {
-        for (char element : GameLogic.CHARS) {
+    private boolean checkLetterInArray(char letter, char[] word) {
+        for (char element : word) {
             if (element == letter) {
+                System.out.println("The letter " + letter + " is in the word!");
                 return true;
             }
         }
@@ -55,17 +55,18 @@ public class GameLogic {
         return wordStatus.contains(String.valueOf(letter));
     }
 
-    private String updateWordStatus(String word, char letter, String wordStatus) {
+    private String updateWordStatus(char[] word, char letter, String wordStatus) {
         StringBuilder sb = new StringBuilder(wordStatus);
-        for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == letter) {
+        for (int i = 0; i < word.length; i++) {
+            if (word[i] == letter) {
                 sb.setCharAt(i, letter);
             }
         }
         return sb.toString();
     }
 
-    private boolean isWordGuessed(String word, String wordStatus) {
-        return word.equals(wordStatus);
+    private boolean isWordGuessed(char[] word, String wordStatus) {
+        String actualWord = new String(word);
+        return actualWord.equals(wordStatus);
     }
 }

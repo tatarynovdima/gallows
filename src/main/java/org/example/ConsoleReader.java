@@ -71,15 +71,19 @@ public class ConsoleReader {
 
         int choice = readInt();
         switch (choice) {
-            case 1:
+            case 1 -> {
                 return 10;
-            case 2:
+            }
+            case 2 -> {
                 return 7;
-            case 3:
+            }
+            case 3 -> {
                 return 5;
-            default:
+            }
+            default -> {
                 System.out.println("Invalid choice. Setting difficulty to Medium.");
                 return 7;
+            }
         }
     }
 
